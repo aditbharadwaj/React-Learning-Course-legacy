@@ -5,6 +5,6 @@ Initial Commit >>
 3. Using Conditional Rendering Component
 
 TO RUN :-
-git copy
-npm i
+git copy ,
+npm i ,
 npm start
