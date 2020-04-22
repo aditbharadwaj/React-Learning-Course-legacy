@@ -8,52 +8,47 @@ class App extends Component {
   state= {
     persons: [
       {
-        name:'adit', age : 28
+        id:253 ,name:'adit', age : 28
       },
       {
-        name:'manu', age: 27
+        id:345 ,name:'manu', age: 27
       },
       {
-        name:'rahul', age : 24
+        id:567 ,name:'rahul', age : 24
       },
     ],
     showPerson: false
   };
-  switchNameHandler = (newName) =>{
-
-    console.log(' wasclicked:');
-    this.setState(
-      {persons: [
-      {
-        name:newName, age : 28
-      },
-      {
-        name:'manu', age: 27
-      },
-      {
-        name:'rahul', age : 24
-      }
-    ]})
+  
+  //flexible component with respective input and key update
+  nameChangeHandler = (event, id) =>{
+   const personIndex = this.state.persons.findIndex(p =>{
+     return p.id === id
+   });
+   const person = {
+     ...this.state.persons[personIndex]
+    };
+    // const person = Object.assign({}, this.state.persons[personIndex]);
+    person.name = event.target.value;
+    const persons = [...this.state.persons];
+     persons[personIndex]= person;
+     this.setState( {persons:persons} );
+  
   };
 
-  nameChangeHandler = (event) =>{
-    this.setState({persons: [
-      {
-        name:'Adit123', age : 28
-      },
-      {
-        name: event.target.value, age: 27
-      },
-      {
-        name:'rahul', age : 24
-      }
-    ]})
-  };
+  
 
   togglePersonHandler= () =>{
       const doesShow = this.state.showPerson;
       this.setState({showPerson : !doesShow})
-  }
+  };
+
+  deletePersonHandler = (personIndex) => {
+    const personUpdate = this.state.persons.slice();//make a copy of the array
+   // const newPersonUpdate = [...this.state.persons]; //alternative
+    personUpdate.splice(personIndex, 1);
+    this.setState({persons:personUpdate})
+  };
   render() {
     // passing Css in JSX
     const style ={
@@ -65,27 +60,26 @@ class App extends Component {
       curson:'pointer'
     };
     // Rendering Component Conditionally using if else (Second Way)
-    let persons1 = null;
+    let persons = null;
     if(this.state.showPerson){
-      persons1 = (
+      
+      persons = (
+        //Iteration of the array with unique index (delete)
         <div>
-        <Person
-       name={this.state.persons[0].name} 
-       age={this.state.persons[0].age}>
-       </Person>
-        <Person 
-        name={this.state.persons[1].name} 
-        age={this.state.persons[1].age}
-        click={this.switchNameHandler.bind(this, 'Adiii')}
-        change={this.nameChangeHandler}>
-        My Hobbies : Racing
-        </Person>
-        <Person 
-        name={this.state.persons[2].name} 
-        age={this.state.persons[2].age}> 
-        </Person>
+
+        {
+          this.state.persons.map((person,index) =>{
+          return <Person 
+          click = {() => this.deletePersonHandler(index)}
+          name={person.name}
+          age= {person.age}
+          key={person.id}
+          changed = {(event) => this.nameChangeHandler(event,person.id)}
+         />
+        })}
+      
     </div> 
-      )
+      );
     }
     return (
       <div className="App">
@@ -99,7 +93,7 @@ class App extends Component {
         onClick={this.togglePersonHandler}>
         Switch Name
         </button>
-       {persons1}
+       {persons}
       </div>
     );
   }
@@ -188,3 +182,21 @@ import Person from './person/Person';
  
  export default App;
   */
+
+  /* changing name 
+  switchNameHandler = (newName) =>{
+
+    console.log(' wasclicked:');
+    this.setState(
+      {persons: [
+      {
+        name:newName, age : 28
+      },
+      {
+        name:'manu', age: 27
+      },
+      {
+        name:'rahul', age : 24
+      }
+    ]})
+  }; */

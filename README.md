@@ -1,4 +1,4 @@
-This Project Just Keep Track of the Commits for each module of the React Course iam Learnin.
+This Project Just Keep Track of the Commits for each module of the React Course i am Learning.
 
 Initial Commit >> 
 1. Understanding Basic Feature of React  
