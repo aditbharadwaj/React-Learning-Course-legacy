@@ -3,7 +3,7 @@ import './App.css';
 import Person from './person/Person';
 import Char from './Char/Char';
 import Validation from './Validation/Validation';
-
+import Radium , { StyleRoot } from 'radium';
 class App extends Component {
 
   state= {
@@ -76,7 +76,11 @@ class App extends Component {
       font: 'inherit',
       border :'1px solid blue',
       padding: '8px',
-      curson:'pointer'
+      cursor:'pointer',
+      ':hover':{
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
     // Rendering Component Conditionally using if else (Second Way)
     let persons = null;
@@ -108,14 +112,31 @@ class App extends Component {
       
     </div> 
       );
+        //passing style dynamically for a particluar style property 
+      style.backgroundColor ='red';
+      style[':hover'] ={
+        backgroundColor: 'yellow',
+        color:'red'
+      }
+    }
+   /*  generic way to call dynamic classes from css
+    let classes = ['red','bold'].join(' '); */
+    //using condition to call the specific Css class 
+    const newClasses = [];
+    if(this.state.persons.length <=2){
+      newClasses.push('red');
+    }
+    if(this.state.persons.length <=1){
+      newClasses.push('bold');
     }
     return (
+      <StyleRoot>
       <div className="App">
         <header className="App-header">
           <h2 className= "App-title">Hello</h2>
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        
+        <p className={newClasses.join(' ')} >Iam awesome</p>
         <button 
         style={style}
         onClick={this.togglePersonHandler}>
@@ -124,11 +145,12 @@ class App extends Component {
        {persons}
        
       </div>
+      </StyleRoot>
     );
   }
 }
 
-export default App;
+export default Radium(App);
 
 // Rendering Component Conditionally (One Way)
 /*  {
