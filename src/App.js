@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './person/Person';
-
+import Char from './Char/Char';
+import Validation from './Validation/Validation';
 
 class App extends Component {
 
@@ -12,13 +13,24 @@ class App extends Component {
       },
       {
         id:345 ,name:'manu', age: 27
-      },
-      {
-        id:567 ,name:'rahul', age : 24
-      },
+      }
     ],
-    showPerson: false
+    showPerson: false,
+    userInput: ''
   };
+
+  //Assignment Practice for user input changes using validation conditions
+  inputChangedHandler = ( event ) => {
+    this.setState( { userInput: event.target.value } );
+  }
+
+  deleteCharHandler = ( index ) => {
+    const text = this.state.userInput.split('');
+    text.splice(index, 1);
+    const updatedText = text.join('');
+    this.setState({userInput: updatedText});
+  }
+
   
   //flexible component with respective input and key update
   nameChangeHandler = (event, id) =>{
@@ -50,6 +62,13 @@ class App extends Component {
     this.setState({persons:personUpdate})
   };
   render() {
+    //Assignment Practice
+    const charList = this.state.userInput.split('').map((ch, index) => {
+      return <Char 
+        character={ch} 
+        key={index}
+        clicked={() => this.deleteCharHandler(index)} />;
+    });
     // passing Css in JSX
     const style ={
       marginTop:'10px',
@@ -77,6 +96,15 @@ class App extends Component {
           changed = {(event) => this.nameChangeHandler(event,person.id)}
          />
         })}
+
+        <hr />
+        <input
+          type="text"
+          onChange={this.inputChangedHandler}
+          value={this.state.userInput} />
+        <p>{this.state.userInput}</p>
+        <Validation inputLength={this.state.userInput.length} />
+        {charList}
       
     </div> 
       );
@@ -91,9 +119,10 @@ class App extends Component {
         <button 
         style={style}
         onClick={this.togglePersonHandler}>
-        Switch Name
+        Show Div
         </button>
        {persons}
+       
       </div>
     );
   }
