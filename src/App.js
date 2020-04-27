@@ -3,7 +3,22 @@ import './App.css';
 import Person from './person/Person';
 import Char from './Char/Char';
 import Validation from './Validation/Validation';
-import Radium , { StyleRoot } from 'radium';
+import styled from 'styled-components';
+
+const StyledButton = styled.button`
+      margintop: 10px ;
+      background-color:  ${props => props.alt ? 'red' : 'green'} ;
+      font:  inherit ;
+      border : 1px solid blue ;
+      padding:  8px ;
+      cursor: pointer ;
+       
+      &:hover {
+        background-color: ${props => props.alt ? 'yellow' : 'purple'} ;
+        color: black;
+      }
+
+`;
 class App extends Component {
 
   state= {
@@ -70,7 +85,7 @@ class App extends Component {
         clicked={() => this.deleteCharHandler(index)} />;
     });
     // passing Css in JSX
-    const style ={
+   /*  const style ={
       marginTop:'10px',
       backgroundColor: 'white',
       font: 'inherit',
@@ -81,7 +96,7 @@ class App extends Component {
         backgroundColor: 'lightgreen',
         color: 'black'
       }
-    };
+    }; */
     // Rendering Component Conditionally using if else (Second Way)
     let persons = null;
     if(this.state.showPerson){
@@ -113,11 +128,11 @@ class App extends Component {
     </div> 
       );
         //passing style dynamically for a particluar style property 
-      style.backgroundColor ='red';
+      /* style.backgroundColor ='red';
       style[':hover'] ={
         backgroundColor: 'yellow',
         color:'red'
-      }
+      } */
     }
    /*  generic way to call dynamic classes from css
     let classes = ['red','bold'].join(' '); */
@@ -130,27 +145,26 @@ class App extends Component {
       newClasses.push('bold');
     }
     return (
-      <StyleRoot>
+    
       <div className="App">
         <header className="App-header">
           <h2 className= "App-title">Hello</h2>
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className={newClasses.join(' ')} >Iam awesome</p>
-        <button 
-        style={style}
+        <StyledButton alt={this.state.showPerson}
         onClick={this.togglePersonHandler}>
         Show Div
-        </button>
+        </StyledButton>
        {persons}
        
       </div>
-      </StyleRoot>
+      
     );
   }
 }
 
-export default Radium(App);
+export default App;
 
 // Rendering Component Conditionally (One Way)
 /*  {

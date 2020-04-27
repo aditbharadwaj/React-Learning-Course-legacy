@@ -7,8 +7,9 @@ Initial Commit >>
 
 *****
 New Package's Added:-
+For CSS queries :-
 npm install -save radium
-
+npm install -save styled-components
 *****
 TO RUN :-
 
