@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import classes from  './App.css';
-import Person from './person/Person';
-import Char from './Char/Char';
-import Validation from './Validation/Validation';
-import ErrorBoundry from './Errorboundry/ErrorBoundary'
-
+import Person from '../components/Persons/person/Person';
+import Char from '../components/Char/Char';
+import Validation from '../components/Validation/Validation';
+import ErrorBoundry from '../components/Errorboundry/ErrorBoundary'
+import Persons from '../components/Persons/Persons'
 
 class App extends Component {
 
@@ -92,18 +92,10 @@ class App extends Component {
       persons = (
         //Iteration of the array with unique index (delete)
         <div>
-
-        {
-          this.state.persons.map((person,index) =>{
-          return <ErrorBoundry key={person.id}>
-          <Person 
-          click = {() => this.deletePersonHandler(index)}
-          name={person.name}
-          age= {person.age}
-          changed = {(event) => this.nameChangeHandler(event,person.id)}
-         /></ErrorBoundry>
-        })}
-
+        <Persons 
+        persons ={this.state.persons}
+        clicked= {this.deleteCharHandler}
+        changed={this.nameChangeHandler}></Persons>
         <hr />
         <input
           type="text"
