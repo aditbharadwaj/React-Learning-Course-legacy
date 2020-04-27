@@ -11,6 +11,14 @@ For CSS queries :-
 npm install -save radium
 npm install -save styled-components
 *****
+
+**********
+when using CSS modules
+npm run eject
+inside config >> inside webpack.config.dev.js and prod and add beow
+modules : true,
+localIdentName: '[name]_[local]_[hash:base64:5]'
+*********
 TO RUN :-
 
 git copy 

@@ -1,9 +1,9 @@
 import React from 'react';
-import './Person.css';
-import styled from 'styled-components';
+import classes from './Person.css';
+//import styled from 'styled-components';
 
 //using styled components using a new component
-const StyledDiv =  styled.div`
+/* const StyledDiv =  styled.div`
 width: 60%;
 margin: auto;
 border: 10px solid #eeee;
@@ -15,7 +15,7 @@ margin-top: 10px;
 @media (min-width:500px) :{
     width:'450px'
 }
-`;
+`; */
 // Rendering Child Compoenenet and usage of Props for passing data and methods
 const person = (props) => {
     //using radium
@@ -27,11 +27,11 @@ const person = (props) => {
     
 return (
    // <div className="Person" style={style}>
-    <StyledDiv>
+    <div className={classes.Person}>
     <p onClick={props.click}> Iam {props.name} and iam {props.age} years old</p>
     <input type="text" onChange={props.changed} value={props.name}/>
      
-    </StyledDiv>
+    </div>
     )
 };
 

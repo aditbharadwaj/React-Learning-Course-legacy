@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from  './App.css';
 import Person from './person/Person';
 import Char from './Char/Char';
 import Validation from './Validation/Validation';
@@ -86,6 +86,7 @@ class App extends Component {
     }; */
     // Rendering Component Conditionally using if else (Second Way)
     let persons = null;
+    let btnClass = [classes.button];
     if(this.state.showPerson){
       
       persons = (
@@ -120,27 +121,29 @@ class App extends Component {
         backgroundColor: 'yellow',
         color:'red'
       } */
+
+      btnClass.push(classes.Red);
     }
    /*  generic way to call dynamic classes from css
     let classes = ['red','bold'].join(' '); */
     //using condition to call the specific Css class 
     const newClasses = [];
     if(this.state.persons.length <=2){
-      newClasses.push('red');
+      newClasses.push(classes.red);
     }
     if(this.state.persons.length <=1){
-      newClasses.push('bold');
+      newClasses.push(classes.bold);
     }
     return (
     
-      <div className="App">
-        <header className="App-header">
-          <h2 className= "App-title">Hello</h2>
-          <h1 className="App-title">Welcome to React</h1>
+      <div className={classes.App}>
+        <header className={classes.App_header}>
+          <h2 className= {classes.App_title}>Hello</h2>
+          <h1 className={classes.App_title}>Welcome to React</h1>
         </header>
         <p className={newClasses.join(' ')} >Iam awesome</p>
         <button
-        className = "button"
+        className = {btnClass.join(' ')}
         onClick={this.togglePersonHandler}>
         Show Div
         </button>
