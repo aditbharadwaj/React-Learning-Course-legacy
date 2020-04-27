@@ -3,22 +3,9 @@ import './App.css';
 import Person from './person/Person';
 import Char from './Char/Char';
 import Validation from './Validation/Validation';
-import styled from 'styled-components';
 
-const StyledButton = styled.button`
-      margintop: 10px ;
-      background-color:  ${props => props.alt ? 'red' : 'green'} ;
-      font:  inherit ;
-      border : 1px solid blue ;
-      padding:  8px ;
-      cursor: pointer ;
-       
-      &:hover {
-        background-color: ${props => props.alt ? 'yellow' : 'purple'} ;
-        color: black;
-      }
 
-`;
+
 class App extends Component {
 
   state= {
@@ -152,10 +139,11 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className={newClasses.join(' ')} >Iam awesome</p>
-        <StyledButton alt={this.state.showPerson}
+        <button
+        className = "button"
         onClick={this.togglePersonHandler}>
         Show Div
-        </StyledButton>
+        </button>
        {persons}
        
       </div>
@@ -165,6 +153,28 @@ class App extends Component {
 }
 
 export default App;
+
+// using stlyed component pacakge 
+//import styled from 'styled-components';
+/* const StyledButton = styled.button`
+      margin-top: 10px ;
+      background-color:  ${props => props.alt ? 'red' : 'green'} ;
+      font:  inherit ;
+      border : 1px solid blue ;
+      padding:  8px ;
+      cursor: pointer ;
+       
+      &:hover {
+        background-color: ${props => props.alt ? 'yellow' : 'purple'} ;
+        color: black;
+      }
+
+`; */
+// inside render
+/* <StyledButton alt={this.state.showPerson}
+onClick={this.togglePersonHandler}>
+Show Div
+</StyledButton> */
 
 // Rendering Component Conditionally (One Way)
 /*  {
