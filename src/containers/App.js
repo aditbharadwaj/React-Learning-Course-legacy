@@ -7,6 +7,12 @@ import Validation from "../components/Validation/Validation";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 class App extends Component {
+  // Life cylce hooks example
+  constructor(props) {
+    super(props);
+
+    console.log(" app.js constructor");
+  }
   state = {
     persons: [
       {
@@ -23,7 +29,34 @@ class App extends Component {
     showPerson: false,
     userInput: "",
   };
+  static getDerivedStateFromProps(props, state) {
+    console.log(" app.js get derive stte from props", props);
+    return state;
+  }
+  // important life cycle
+  componentDidMount() {
+    console.log(" it ran");
+  }
 
+  componentDidUpdate() {
+    console.log(" app js compoeent did update");
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(" app js should component did update");
+    return true;
+    //requeires a boolean return
+  }
+  //legacy lifecycle
+  /*  componentWillMount(){
+    console.log(' component will mount' );
+  } 
+  componentWillReceiveProps(props) {
+    console.log("props :", props);
+  }
+  componentWillUpdate(){
+
+    console.log(' runs component  did update', );
+  }*/
   //Assignment Practice for user input changes using validation conditions
   inputChangedHandler = (event) => {
     this.setState({ userInput: event.target.value });
@@ -63,6 +96,7 @@ class App extends Component {
     this.setState({ persons: personUpdate });
   };
   render() {
+    console.log(" render method app js");
     //Assignment Practice
     const charList = this.state.userInput.split("").map((ch, index) => {
       return (
@@ -73,7 +107,7 @@ class App extends Component {
         />
       );
     });
-    
+
     // Rendering Component Conditionally using if else (Second Way)
     let persons = null;
 
@@ -105,6 +139,7 @@ class App extends Component {
           showPerson={this.state.showPerson}
           persons={this.state.persons}
           clicked={this.togglePersonHandler}
+          appTitle={this.props.appTitle}
         ></Cockpit>
         {persons}
       </div>
@@ -115,7 +150,7 @@ class App extends Component {
 export default App;
 
 // passing Css in JSX
-    /*  const style ={
+/*  const style ={
       marginTop:'10px',
       backgroundColor: 'white',
       font: 'inherit',

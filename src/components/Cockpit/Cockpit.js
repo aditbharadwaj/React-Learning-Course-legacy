@@ -16,7 +16,7 @@ const cockpit = (props) => {
     <div className={classes.Cockpit}>
       <header className={classes.App_header}>
         <h2 className={classes.App_title}>Hello</h2>
-        <h1 className={classes.App_title}>Welcome to React</h1>
+        <h1 className={classes.App_title}>{props.appTitle}</h1>
       </header>
       <p className={newClasses.join(" ")}>Iam awesome</p>
       <button className={btnClass} onClick={props.clicked}>
