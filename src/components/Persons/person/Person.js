@@ -1,5 +1,7 @@
 import React, { Component , Fragment } from "react";
-import classes from "./Person.css";
+import PropTypes from 'prop-types';
+
+//import classes from "./Person.css";
 //import Aux from '../../../hoc/Auxiliary'
 // Rendering Child Compoenenet and usage of Props for passing data and methods
 //fragment is used like auxillary component proavide by react 
@@ -24,7 +26,13 @@ class Person extends Component {
     );
   }
 }
-
+//Defining Data types for each prop for the particular component 
+Person.propTypes ={
+  click :PropTypes.func,
+  name:PropTypes.string,
+  age:PropTypes.number,
+  changed:PropTypes.func
+};
 export default Person;
 
 //using radium

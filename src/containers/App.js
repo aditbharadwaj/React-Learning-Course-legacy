@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import classes from "./App.css";
-import withClass from '../hoc/wwithClass';
+import withClass from "../hoc/wwithClass";
 //import WithClass from '../hoc/WithClass';
 //import Person from '../components/Persons/person/Person';
 import Char from "../components/Char/Char";
@@ -8,7 +8,7 @@ import Validation from "../components/Validation/Validation";
 //import ErrorBoundry from '../components/Errorboundry/ErrorBoundary'
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
-import Aux from '../hoc/Auxiliary'
+import Aux from "../hoc/Auxiliary";
 class App extends Component {
   // Life cylce hooks example
   constructor(props) {
@@ -31,7 +31,8 @@ class App extends Component {
     ],
     showPerson: false,
     userInput: "",
-    showCockpit :true
+    showCockpit: true,
+    changeCounter: 0,
   };
   static getDerivedStateFromProps(props, state) {
     console.log(" app.js get derive stte from props", props);
@@ -85,7 +86,14 @@ class App extends Component {
     person.name = event.target.value;
     const persons = [...this.state.persons];
     persons[personIndex] = person;
-    this.setState({ persons: persons });
+
+    //updating state and depending on the old state code below
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1,
+      };
+    });
   };
 
   togglePersonHandler = () => {
@@ -139,15 +147,23 @@ class App extends Component {
 
     return (
       <Aux>
-      <button onClick={() =>{this.setState({showCockpit: false})}}>Remove Cockpit</button>
-        {this.state.showCockpit ? <Cockpit
-          showPerson={this.state.showPerson}
-          personsLength={this.state.persons.length}
-          clicked={this.togglePersonHandler}
-          appTitle={this.props.appTitle}
-        ></Cockpit> : null}
+        <button
+          onClick={() => {
+            this.setState({ showCockpit: false });
+          }}
+        >
+          Remove Cockpit
+        </button>
+        {this.state.showCockpit ? (
+          <Cockpit
+            showPerson={this.state.showPerson}
+            personsLength={this.state.persons.length}
+            clicked={this.togglePersonHandler}
+            appTitle={this.props.appTitle}
+          ></Cockpit>
+        ) : null}
         {persons}
-        </Aux>
+      </Aux>
     );
   }
 }
