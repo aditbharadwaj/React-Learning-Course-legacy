@@ -28,6 +28,7 @@ class App extends Component {
     ],
     showPerson: false,
     userInput: "",
+    showCockpit :true
   };
   static getDerivedStateFromProps(props, state) {
     console.log(" app.js get derive stte from props", props);
@@ -135,12 +136,13 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
+      <button onClick={() =>{this.setState({showCockpit: false})}}>Remove Cockpit</button>
+        {this.state.showCockpit ? <Cockpit
           showPerson={this.state.showPerson}
-          persons={this.state.persons}
+          personsLength={this.state.persons.length}
           clicked={this.togglePersonHandler}
           appTitle={this.props.appTitle}
-        ></Cockpit>
+        ></Cockpit> : null}
         {persons}
       </div>
     );
