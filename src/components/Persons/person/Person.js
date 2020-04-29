@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import classes from "./Person.css";
-
+import Aux from '../../../hoc/Auxiliary'
 // Rendering Child Compoenenet and usage of Props for passing data and methods
 class Person extends Component {
   render() {
     console.log(" Person.js renderd");
     return (
       // <div className="Person" style={style}>
-      <div className={classes.Person}>
+      //<div className={classes.Person}>
+      <Aux>
         <p onClick={this.props.click}>
           {" "}
           Iam {this.props.name} and iam {this.props.age} years old
@@ -17,7 +18,8 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-      </div>
+        </Aux>
+      //</div>
     );
   }
 }
@@ -46,3 +48,25 @@ margin-top: 10px;
     width:'450px'
 }
 `; */
+
+/* return inside render can also call array of elements 
+and each element need a unique key */
+/* 
+render() [
+    console.log(" Person.js renderd");
+    return (
+      
+        <p key="key1" onClick={this.props.click}>
+          {" "}
+          Iam {this.props.name} and iam {this.props.age} years old
+        </p>,
+        <input
+          key="key2"
+          type="text"
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+      
+    );
+    ]
+   */

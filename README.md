@@ -15,7 +15,7 @@ npm install -save styled-components
 **********
 when using CSS modules
 npm run eject
-inside config >> inside webpack.config.dev.js and prod and add beow
+inside config >> inside webpack.config.dev.js and prod and add below
 modules : true,
 localIdentName: '[name]_[local]_[hash:base64:5]'
 *********

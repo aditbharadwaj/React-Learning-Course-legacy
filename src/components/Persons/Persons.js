@@ -1,27 +1,8 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 import Person from "./person/Person";
-class Persons extends Component {
-  /* static getDerivedStateFromProps(props, state) {
-    console.log(" Persons js getderrived state");
-    return state;
-  } */
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("person js should component update");
-    /* it helps in saving time and speed of the application 
-  by rendering only what and when it is called, we are comparing pointers */
-    if (
-      nextProps.persons !== this.props.perons ||
-      nextProps.changed !== this.props.changed ||
-      nextProps.clicked !== this.props.clicked
-    ) {
-      return true;
-    } else {
-
-      console.log('Not changed ' );
-      return false;
-    }
-  }
+class Persons extends PureComponent {
+  //using pure component implements shouldcomponentupdate life cycle it provides props check
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log(" persons js getsnapshot update");
@@ -54,3 +35,26 @@ class Persons extends Component {
 }
 
 export default Persons;
+
+// Component Life Cycles
+/* static getDerivedStateFromProps(props, state) {
+    console.log(" Persons js getderrived state");
+    return state;
+  } */
+
+/*   shouldComponentUpdate(nextProps, nextState) {
+    console.log("person js should component update");
+  //   it helps in saving time and speed of the application 
+  // by rendering only what and when it is called, we are comparing pointers
+    if (
+      nextProps.persons !== this.props.perons ||
+      nextProps.changed !== this.props.changed ||
+      nextProps.clicked !== this.props.clicked
+    ) {
+      return true;
+    } else {
+
+      console.log('Not changed ' );
+      return false;
+    }
+  } */
