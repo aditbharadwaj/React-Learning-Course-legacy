@@ -1,14 +1,15 @@
-import React, { Component } from "react";
+import React, { Component , Fragment } from "react";
 import classes from "./Person.css";
-import Aux from '../../../hoc/Auxiliary'
+//import Aux from '../../../hoc/Auxiliary'
 // Rendering Child Compoenenet and usage of Props for passing data and methods
+//fragment is used like auxillary component proavide by react 
 class Person extends Component {
   render() {
     console.log(" Person.js renderd");
     return (
       // <div className="Person" style={style}>
       //<div className={classes.Person}>
-      <Aux>
+      <Fragment>
         <p onClick={this.props.click}>
           {" "}
           Iam {this.props.name} and iam {this.props.age} years old
@@ -18,7 +19,7 @@ class Person extends Component {
           onChange={this.props.changed}
           value={this.props.name}
         />
-        </Aux>
+        </Fragment>
       //</div>
     );
   }

@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import classes from "./App.css";
+import withClass from '../hoc/wwithClass';
+//import WithClass from '../hoc/WithClass';
 //import Person from '../components/Persons/person/Person';
 import Char from "../components/Char/Char";
 import Validation from "../components/Validation/Validation";
 //import ErrorBoundry from '../components/Errorboundry/ErrorBoundary'
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
+import Aux from '../hoc/Auxiliary'
 class App extends Component {
   // Life cylce hooks example
   constructor(props) {
@@ -135,7 +138,7 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
+      <Aux>
       <button onClick={() =>{this.setState({showCockpit: false})}}>Remove Cockpit</button>
         {this.state.showCockpit ? <Cockpit
           showPerson={this.state.showPerson}
@@ -144,12 +147,25 @@ class App extends Component {
           appTitle={this.props.appTitle}
         ></Cockpit> : null}
         {persons}
-      </div>
+        </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
+
+//ClassName HOC component code
+/* return (
+  <WithClass classes={classes.App}>
+  <button onClick={() =>{this.setState({showCockpit: false})}}>Remove Cockpit</button>
+    {this.state.showCockpit ? <Cockpit
+      showPerson={this.state.showPerson}
+      personsLength={this.state.persons.length}
+      clicked={this.togglePersonHandler}
+      appTitle={this.props.appTitle}
+    ></Cockpit> : null}
+    {persons}
+): */
 
 // passing Css in JSX
 /*  const style ={
