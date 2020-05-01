@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-
+import AuthContext from '../../context/auth-context'
 import Person from "./person/Person";
 class Persons extends PureComponent {
   //using pure component implements shouldcomponentupdate life cycle it provides props check
@@ -20,7 +20,7 @@ class Persons extends PureComponent {
   }
   render() {
     console.log(" Persons js rendering...");
-    return this.props.persons.map((person, index) => {
+    return (this.props.persons.map((person, index) => {
       return (
         <Person
           click={() => this.props.clicked(index)}
@@ -28,9 +28,10 @@ class Persons extends PureComponent {
           age={person.age}
           key={person.id}
           changed={(event) => this.props.changed(event, person.id)}
+          //isAuth={this.props.isAuthenticated}
         />
       );
-    });
+    }));
   }
 }
 

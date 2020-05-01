@@ -9,6 +9,7 @@ import Validation from "../components/Validation/Validation";
 import Persons from "../components/Persons/Persons";
 import Cockpit from "../components/Cockpit/Cockpit";
 import Aux from "../hoc/Auxiliary";
+import AuthContext from "../context/auth-context";
 class App extends Component {
   // Life cylce hooks example
   constructor(props) {
@@ -33,6 +34,7 @@ class App extends Component {
     userInput: "",
     showCockpit: true,
     changeCounter: 0,
+    authenticated: false,
   };
   static getDerivedStateFromProps(props, state) {
     console.log(" app.js get derive stte from props", props);
@@ -72,6 +74,11 @@ class App extends Component {
     text.splice(index, 1);
     const updatedText = text.join("");
     this.setState({ userInput: updatedText });
+  };
+
+  //using prop chain
+  loginHandler = () => {
+    this.setState({ authenticated: true });
   };
 
   //flexible component with respective input and key update
@@ -131,6 +138,7 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
             changed={this.nameChangeHandler}
+            isAuthenticated={this.state.authenticated}
           ></Persons>
           <hr />
           <input
@@ -154,15 +162,23 @@ class App extends Component {
         >
           Remove Cockpit
         </button>
-        {this.state.showCockpit ? (
-          <Cockpit
-            showPerson={this.state.showPerson}
-            personsLength={this.state.persons.length}
-            clicked={this.togglePersonHandler}
-            appTitle={this.props.appTitle}
-          ></Cockpit>
-        ) : null}
-        {persons}
+        <AuthContext.Provider
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler,
+          }}
+        >
+          {this.state.showCockpit ? (
+            <Cockpit
+              showPerson={this.state.showPerson}
+              personsLength={this.state.persons.length}
+              clicked={this.togglePersonHandler}
+              appTitle={this.props.appTitle}
+              login={this.loginHandler}
+            />
+          ) : null}
+          {persons}
+        </AuthContext.Provider>
       </Aux>
     );
   }

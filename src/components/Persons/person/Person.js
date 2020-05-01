@@ -1,6 +1,6 @@
 import React, { Component , Fragment } from "react";
 import PropTypes from 'prop-types';
-
+import Authcontext from '../../../context/auth-context'
 //import classes from "./Person.css";
 //import Aux from '../../../hoc/Auxiliary'
 // Rendering Child Compoenenet and usage of Props for passing data and methods
@@ -11,11 +11,19 @@ class Person extends Component {
     super(props);
     this.inputElementRef = React.createRef();
   }
+
+  //method 2 to use context in class component hsorter and easier
+  static contextType = Authcontext;
+
   componentDidMount(){
     //using reference method 1 to initate focus on any element old version
     //this.inputElement.focus();
     //method 2 below new version
     this.inputElementRef.current.focus();
+
+    //method 2 for context 
+
+    console.log(this.context.authenticated );
   }
   render() {
     console.log(" Person.js renderd");
@@ -23,6 +31,8 @@ class Person extends Component {
       // <div className="Person" style={style}>
       //<div className={classes.Person}>
       <Fragment>
+      { this.context.authenticated  ? <p>Authenticated</p> : <p>Is not authentiated</p>}
+     
         <p key="12" onClick={this.props.click}>
           {" "}
           Iam {this.props.name} and iam {this.props.age} years old
@@ -49,6 +59,13 @@ Person.propTypes ={
 };
 export default Person;
 
+//method 1 for context 
+/* <Authcontext.Consumer>
+      {context => context.authenticated  ? <p>Authenticated</p> : <p>Is not authentiated</p>}
+      </Authcontext.Consumer> */
+
+
+// {this.props.isAuth ? <p>Authenticated</p> : <p>Is not authentiated</p>}
 //using radium
 /*  const style = {
         '@media (min-width:500px)':{

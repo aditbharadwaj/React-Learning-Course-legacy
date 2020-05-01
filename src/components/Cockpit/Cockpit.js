@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useContext } from "react";
 import classes from "./Cockpit.css";
+import AuthContext from '../../context/auth-context';
 const cockpit = (props) => {
   //using ref inside functional components
   const toggleBtnRef = useRef(null);
-  
+  //method 2 for context in functional components
+  const authContext = useContext(AuthContext);
+  console.log('authContext :', authContext.authenticated);
   useEffect(() => {
     console.log(" Cockpit js useeffect rednering");
     /* setTimeout(() => {
@@ -46,12 +49,16 @@ const cockpit = (props) => {
       <button 
       className={btnClass} 
       onClick={props.clicked}
-      ref={toggleBtnRef}
-      >
+      ref={toggleBtnRef} >
         Show Div
       </button>
+      <button onClick={authContext.login}>log in</button>
     </div>
   );
 };
 
 export default React.memo(cockpit);
+// method 1 auth context
+/* <AuthContext.Consumer> 
+    { context =>  <button onClick={context.login}>log in</button>}
+     </AuthContext.Consumer> */
