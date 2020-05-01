@@ -6,20 +6,34 @@ import PropTypes from 'prop-types';
 // Rendering Child Compoenenet and usage of Props for passing data and methods
 //fragment is used like auxillary component proavide by react 
 class Person extends Component {
+
+  constructor(props){
+    super(props);
+    this.inputElementRef = React.createRef();
+  }
+  componentDidMount(){
+    //using reference method 1 to initate focus on any element old version
+    //this.inputElement.focus();
+    //method 2 below new version
+    this.inputElementRef.current.focus();
+  }
   render() {
     console.log(" Person.js renderd");
     return (
       // <div className="Person" style={style}>
       //<div className={classes.Person}>
       <Fragment>
-        <p onClick={this.props.click}>
+        <p key="12" onClick={this.props.click}>
           {" "}
           Iam {this.props.name} and iam {this.props.age} years old
         </p>
         <input
+          key="13"
           type="text"
           onChange={this.props.changed}
           value={this.props.name}
+         // ref={(inputEl) =>{this.inputElementRef = inputEl}} //method 1
+         ref = {this.inputElementRef}
         />
         </Fragment>
       //</div>
