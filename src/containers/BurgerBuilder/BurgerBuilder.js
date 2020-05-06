@@ -8,7 +8,7 @@ import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 const INGREDIENTS_PRICES = {
   salad: 0.5,
   cheese: 0.6,
-  meath: 1.3,
+  meat: 1.3,
   bacon: 0.7,
 };
 class BurgerBuilder extends Component {
@@ -30,11 +30,15 @@ class BurgerBuilder extends Component {
 
   purchaseHandler = () => {
     this.setState({ pruchasing: true });
-  }
+  };
+
+  purchaseContinueHandler = () => {
+    alert("You Continue!");
+  };
 
   purchaseCancelHandler = () => {
-    this.setState({ pruchasing: false});
-  }
+    this.setState({ pruchasing: false });
+  };
 
   updatePurchaseState(ingredients) {
     const sum = Object.keys(ingredients)
@@ -85,11 +89,15 @@ class BurgerBuilder extends Component {
     }
     return (
       <Auxillary>
-        <Modal 
-        show = {this.state.pruchasing}
-        modalClosed={this.purchaseCancelHandler}
+        <Modal
+          show={this.state.pruchasing}
+          modalClosed={this.purchaseCancelHandler}
         >
-          <OrderSummary ingredients={this.state.ingredients} />
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+          />
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
